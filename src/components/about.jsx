@@ -1,61 +1,147 @@
 import React from 'react';
-import { Box, Typography, Avatar, Fade, Slide, Grid, Chip } from '@mui/material';
-import PersonIcon from '@mui/icons-material/Person';
-import CodeIcon from '@mui/icons-material/Code'; // Icon for skills
+import myImg from '../assets/images/ashika.jpg';
+import { Box, Typography, Avatar, Fade, Slide, Grid, Chip, Zoom } from '@mui/material';
+import CodeIcon from '@mui/icons-material/Code';
 
 const About = () => {
-  const skills = ['React', 'JavaScript', 'Node.js', 'MySQL']; // Highlighted skills from your description
+  const skills = ['React', 'JavaScript', 'Node.js', 'MySQL', 'Express', 'MongoDB'];
 
   return (
     <Fade in={true} timeout={1000}>
       <Box
         sx={{
           textAlign: 'center',
-          py: 6,
-          px: 2,
-          background: 'linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(255, 69, 0, 0.1) 100%)', // Subtle gradient for attraction
-          borderRadius: 4,
-          boxShadow: '0 0 20px rgba(138, 43, 226, 0.3)', // Glow effect from theme
-          maxWidth: 800,
+          py: { xs: 5, md: 7 },
+          px: { xs: 2, md: 3 },
+          background: 'rgba(255,255,255,0.03)',
+          borderRadius: 5,
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 0 30px rgba(99,102,241,0.4)',
+          maxWidth: 900,
           mx: 'auto',
+          animation: 'fadeIn 1.5s ease',
+
+          '@keyframes float': {
+            '0%': { transform: 'translateY(0px)' },
+            '50%': { transform: 'translateY(-12px)' },
+            '100%': { transform: 'translateY(0px)' },
+          },
         }}
       >
-        <Avatar
+        {/* Floating Avatar */}
+        <Zoom in={true} timeout={1200}>
+          <Avatar
+            src={myImg}
+            alt="Ashika Paudel"
+            sx={{
+              width: { xs: 110, sm: 130, md: 150 },
+              height: { xs: 110, sm: 130, md: 150 },
+              mx: 'auto',
+              mb: 3,
+              border: '4px solid',
+              borderColor: 'primary.main',
+              boxShadow: '0 0 25px rgba(139,92,246,0.6)',
+              animation: 'float 4s ease-in-out infinite',
+              objectFit: 'cover',
+            }}
+          />
+        </Zoom>
+
+        {/* Name */}
+        <Typography
+          variant="h2"
+          gutterBottom
           sx={{
-            width: 140,
-            height: 140,
-            mx: 'auto',
-            mb: 3,
-            bgcolor: 'secondary.main',
-            border: '4px solid',
-            borderColor: 'primary.main',
-            boxShadow: '0 0 15px rgba(255, 69, 0, 0.5)', // Orange glow for eye-catching effect
+            color: 'primary.main',
+            fontSize: { xs: '1.8rem', sm: '2.2rem', md: '2.8rem' },
+            fontWeight: 700,
           }}
         >
-          <PersonIcon sx={{ fontSize: 70 }} />
-        </Avatar>
-        <Typography variant="h2" gutterBottom sx={{ color: 'primary.main' }}>
           Hi, I'm Ashika Paudel
         </Typography>
-        <Typography variant="h5" color="text.secondary" gutterBottom>
-          Full-Stack Developer | UI/UX Enthusiast
-        </Typography>
-        <Typography variant="body1" sx={{ mt: 2, mb: 4, maxWidth: 600, mx: 'auto', lineHeight: 1.6 }}>
-          Passionate about crafting beautiful, functional web applications that solve real-world problems. With expertise in modern technologies like React, JavaScript, Node.js, and MySQL, I focus on clean code, intuitive design, and seamless user experiences. Let's build something amazing together!
-        </Typography>
-        <Slide direction="up" in={true} timeout={1200}>
-          <Grid container spacing={1} justifyContent="center" sx={{ mb: 2 }}>
+
+        {/* Title */}
+        <Slide direction="up" in={true} timeout={900}>
+          <Typography
+            variant="h5"
+            color="text.secondary"
+            gutterBottom
+            sx={{ fontSize: { xs: '1rem', sm: '1.2rem', md: '1.4rem' } }}
+          >
+            Full-Stack Developer • Frontend  Enthusiast
+          </Typography>
+        </Slide>
+
+        {/* About Text */}
+        <Fade in={true} timeout={1400}>
+          <Typography
+            variant="body1"
+            sx={{
+              mt: 2,
+              mb: 4,
+              maxWidth: 650,
+              mx: 'auto',
+              lineHeight: 1.7,
+              fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.1rem' },
+            }}
+          >
+            I love creating modern, beautiful, and high-performance web applications.
+            My focus is on writing clean code, intuitive user interfaces, and building
+            seamless digital experiences using technologies like React, JavaScript,
+            Node.js, and MySQL.
+          </Typography>
+        </Fade>
+
+        {/* Quote */}
+        <Fade in={true} timeout={1600}>
+          <Box
+            sx={{
+              mt: 3,
+              mb: 4,
+              mx: 'auto',
+              maxWidth: 600,
+              p: { xs: 2, md: 2.5 },
+              borderLeft: '5px solid',
+              borderColor: 'secondary.main',
+              background: 'rgba(255,255,255,0.05)',
+              borderRadius: 2,
+              fontStyle: 'italic',
+              fontSize: { xs: '1rem', sm: '1.1rem', md: '1.25rem' },
+              color: 'secondary.main',
+              boxShadow: '0 0 20px rgba(99,102,241,0.2)',
+            }}
+          >
+            “Always learning, always building.”
+          </Box>
+        </Fade>
+
+        {/* Skill Chips */}
+        <Slide direction="up" in={true} timeout={1500}>
+          <Grid
+            container
+            spacing={{ xs: 1, sm: 1.5 }}
+            justifyContent="center"
+            sx={{ mb: 3 }}
+          >
             {skills.map((skill, index) => (
               <Grid item key={index}>
                 <Chip
-                  icon={<CodeIcon />}
+                  icon={<CodeIcon sx={{ fontSize: { xs: 18, md: 22 } }} />}
                   label={skill}
                   color="primary"
                   variant="outlined"
                   sx={{
                     fontWeight: 600,
+                    px: { xs: 1, md: 1.5 },
+                    py: { xs: 0.3, md: 0.5 },
+                    fontSize: { xs: '0.75rem', md: '0.9rem' },
                     borderColor: 'secondary.main',
-                    '&:hover': { backgroundColor: 'secondary.main', color: 'white' },
+                    transition: '0.3s',
+                    '&:hover': {
+                      backgroundColor: 'secondary.main',
+                      color: 'white',
+                      transform: 'scale(1.1)',
+                    },
                   }}
                 />
               </Grid>
